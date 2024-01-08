@@ -40,13 +40,3 @@ DOM:
   </Spot>
 </Viewport>
 ```
-
-```tsx
-<Viewport>
-  <Spot>
-    <Layer>
-      <h1 style={{ opacity: "var(--parallaxRate)" }}>Title</h1>
-    </Layer>
-  </Spot>
-</Viewport>
-```
