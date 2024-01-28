@@ -19,7 +19,9 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "types": ["vitest", "vitest/globals"]
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
