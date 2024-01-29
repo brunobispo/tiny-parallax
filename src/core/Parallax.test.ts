@@ -11,15 +11,11 @@ describe("Parallax", () => {
     element.style.width = "10vw";
     element.textContent = "ELEMENT";
     document.body.append(element);
-    document.body.style.paddingBlock = "100vh";
-    document.body.style.paddingInline = "100vw";
   });
 
   afterEach(() => {
     parallax.remove();
     element.remove();
-    document.body.style.paddingInline = "none";
-    document.body.style.paddingBlock = "none";
   });
 
   it("triggers the callback when is initialized", () => {

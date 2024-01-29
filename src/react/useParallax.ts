@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { RefObject, useContext, useEffect } from "react";
 import {
   FrameContext,
   OptionsContext,
@@ -10,7 +10,7 @@ import * as utils from "src/utils";
 
 export interface UseParallaxOptions extends ParallaxOptions {
   viewport?: ViewportElement;
-  element?: FrameElement;
+  element?: FrameElement | RefObject<FrameElement> | null;
 }
 
 /**
@@ -27,14 +27,18 @@ export function useParallax(
   const optionsCtx = useContext(OptionsContext);
   const options = utils.mergeOptions(optionsCtx, optionsArgs);
   const frameCtx = useContext(FrameContext);
-  const element = options.element ?? frameCtx;
   const viewportCtx = useContext(ViewportContext);
   const viewport = options.viewport ?? viewportCtx ?? undefined;
 
   useEffect(() => {
+    const element =
+      options.element && "current" in options.element
+        ? options.element.current
+        : options.element ?? frameCtx;
+
     if (element) {
       const parallax = new Parallax(fn, viewport, element, options);
       return () => parallax.remove();
     }
-  }, [options, element, viewport]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [options, options.element, frameCtx, viewport]); // eslint-disable-line react-hooks/exhaustive-deps
 }
