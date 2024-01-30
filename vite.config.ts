@@ -1,6 +1,7 @@
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { resolve } from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +16,12 @@ export default defineConfig({
       },
     },
   ] as never,
+  build: {
+    lib: {
+      entry: resolve(__dirname, "src/index.ts"),
+      formats: ["es"],
+    },
+  },
   test: {
     globals: true,
     setupFiles: ["./src/tests.ts"],
