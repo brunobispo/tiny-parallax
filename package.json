@@ -12,6 +12,7 @@
     "build-storybook": "storybook build",
     "test": "vitest"
   },
+  "main": "dist/index.js",
   "peerDependencies": {
     "react": "^18.2.0"
   },
