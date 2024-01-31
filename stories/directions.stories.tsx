@@ -24,8 +24,8 @@ export const Vertical: StoryObj<typeof Layer> = {
 export const Horizontal: StoryObj<typeof Layer> = {
   render() {
     return (
-      <Viewport className="viewport" direction="horizontal">
-        <Frame className="frame horizontal">
+      <Viewport className="viewport horizontal" direction="horizontal">
+        <Frame className="frame">
           <Layer>
             <Example />
           </Layer>
