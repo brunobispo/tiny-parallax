@@ -1,19 +1,19 @@
-# react-tiny-parallax
+# tiny-parallax
 
-Creating scroll-based animations often involves complex calculations and event handling. The `react-tiny-parallax` library simplifies this process by computing a parallax rate as elements move within the viewport. This rate can be utilized to dynamically adjust styles, enabling fluid and responsive transitions that are easily managed through CSS.
+Creating scroll-based animations often involves complex calculations and event handling. The `tiny-parallax` library simplifies this process by computing a parallax rate as elements move within the viewport. This rate can be utilized to dynamically adjust styles, enabling fluid and responsive transitions that are easily managed through CSS.
 
 ## Live Demo
 
-Experience the capabilities of `react-tiny-parallax` firsthand with our live demo:
+Experience the capabilities of `tiny-parallax` firsthand with our live demo:
 
-[View Demo](https://brunobispo.github.io/react-tiny-parallax)
+[View Demo](https://brunobispo.github.io/tiny-parallax)
 
 ## Getting Started
 
-To incorporate `react-tiny-parallax` into your project, install the package via npm:
+To incorporate `tiny-parallax` into your project, install the package via npm:
 
 ```bash
-npm install react-tiny-parallax --save
+npm install tiny-parallax --save
 ```
 
 ## How to Use
@@ -23,7 +23,7 @@ npm install react-tiny-parallax --save
 #### CSS-Based Animation
 
 ```jsx
-import { Frame, Layer } from "react-tiny-parallax";
+import { Frame, Layer } from "tiny-parallax";
 
 const App = () => (
   <Frame>
@@ -34,13 +34,13 @@ const App = () => (
 );
 ```
 
-This example demonstrates how to animate an element using CSS variables that are dynamically updated by `react-tiny-parallax`.
+This example demonstrates how to animate an element using CSS variables that are dynamically updated by `tiny-parallax`.
 
 #### Imperative Animation
 
 ```jsx
 import { useRef } from "react";
-import { Frame, Layer, useParallax } from "react-tiny-parallax";
+import { Frame, Layer, useParallax } from "tiny-parallax";
 
 const Video = () => {
   const video = useRef();
@@ -72,7 +72,7 @@ This example showcases an imperative approach to animation, where the current ti
 To specify the range within the viewport in which the frame should animate, utilize the `range` property. For instance, the setup below initiates the animation when the element enters the bottom of the screen and concludes it when the center of the frame aligns with the viewport's center:
 
 ```jsx
-import { Frame, Layer } from "react-tiny-parallax";
+import { Frame, Layer } from "tiny-parallax";
 
 const App = () => (
   <Frame>
