@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react";
 import { useRef } from "react";
-import { Frame, Layer, useParallax } from "src";
+import { Frame, useParallax } from "src";
 import videoSrc from "./video.mp4";
 
 function Player() {
@@ -12,9 +12,13 @@ function Player() {
   });
 
   return (
-    <Layer>
-      <video ref={video} style={{ width: "100%" }} src={videoSrc} />
-    </Layer>
+    <video
+      ref={video}
+      style={{ width: "100%" }}
+      src={videoSrc}
+      autoPlay
+      playsInline
+    />
   );
 }
 
