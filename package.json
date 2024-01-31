@@ -12,7 +12,9 @@
     "build-storybook": "storybook build",
     "test": "vitest"
   },
+  "sideEffects": false,
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "peerDependencies": {
     "react": "^18.2.0"
   },
@@ -47,6 +49,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.8",
     "vite-plugin-commonjs": "^0.10.1",
+    "vite-plugin-dts": "^3.7.2",
     "vite-tsconfig-paths": "^4.3.1",
     "vitest": "^1.2.2"
   }

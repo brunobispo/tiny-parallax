@@ -23,6 +23,6 @@
 
     "types": ["vitest", "vitest/globals"]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["src/**/*", "stories/**/*"],
   "exclude": ["node_modules"]
 }
