@@ -20,7 +20,7 @@ npm install tiny-parallax --save
 
 ### In a React Application
 
-Animate with CSS:
+#### CSS-Based Animation
 
 ```jsx
 import { Frame, Layer } from "tiny-parallax";
@@ -34,7 +34,9 @@ const App = () => (
 );
 ```
 
-To animate imperatively:
+This example demonstrates how to animate an element using CSS variables that are dynamically updated by `tiny-parallax`.
+
+#### Imperative Animation
 
 ```jsx
 import { useRef } from "react";
@@ -63,7 +65,11 @@ const App = () => (
 );
 ```
 
-To define the range within the viewport that the frame should animate through, use the range property. This setup starts the animation when the element enters the bottom edge of the screen and completes it once the center of the frame aligns with the center of the viewport:
+This example showcases an imperative approach to animation, where the current time of a video is controlled by the parallax rate.
+
+## Ranges
+
+To specify the range within the viewport in which the frame should animate, utilize the `range` property. For instance, the setup below initiates the animation when the element enters the bottom of the screen and concludes it when the center of the frame aligns with the viewport's center:
 
 ```jsx
 import { Frame, Layer } from "tiny-parallax";
@@ -77,4 +83,4 @@ const App = () => (
 );
 ```
 
-Additionally, you can utilize the library's built-in range functions to easily define animation boundaries. For more details, refer to the source code in [src/core/ranges.ts](src/core/ranges.ts).
+For convenience, the library includes predefined range functions to easily set up animation thresholds. For in-depth information, consult the source code at [src/core/ranges.ts](src/core/ranges.ts).
