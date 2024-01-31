@@ -3,8 +3,8 @@ import { ReactNode } from "react";
 import { Frame, Layer, RangeFunction, useParallaxValue } from "src";
 
 const Header = (props: { children: ReactNode }) => {
-  // initiates stick animation when the frame aligns with the viewport's top edge and continue until it's 100 pixels above the visible area
-  const stickRange: RangeFunction = (v) => [v, v + 100];
+  // initiates stick animation when the frame aligns with the viewport's top edge and continue until it's 80 pixels above the visible area
+  const stickRange: RangeFunction = (v) => [v, v + 80];
 
   // triggers the leave animation when the frame bottom edge is 50px from the viewport's top edge
   const leaveRange: RangeFunction = (v, e) => [v + e - 50, v + e - 50];
@@ -15,13 +15,13 @@ const Header = (props: { children: ReactNode }) => {
 
   return (
     <Layer range={stickRange} cssVariable="--stick-rate">
-      <div style={{ height: "10rem" }}>
+      <div style={{ height: "8rem" }}>
         <div
           style={{
             top: 0,
             width: "100%",
-            paddingInline: "3rem",
-            marginInline: "-3rem",
+            paddingInline: "1rem",
+            marginInline: "-1rem",
             position: hasBegin ? "fixed" : "relative",
             backgroundColor: hasEnd ? "white" : "transparent",
             transform: hasLeft ? `translateY(-100%)` : undefined,
@@ -32,7 +32,8 @@ const Header = (props: { children: ReactNode }) => {
           <h2
             style={{
               margin: 0,
-              fontSize: `calc(13em - var(--stick-rate, 0) * 7rem)`,
+              fontSize: `calc(9em - var(--stick-rate, 0) * 4rem)`,
+              whiteSpace: "nowrap",
             }}
           >
             {props.children}
@@ -50,10 +51,10 @@ export default {
   },
   render() {
     return (
-      <main style={{ margin: "3rem" }}>
+      <main style={{ padding: "1rem", overflowX: "hidden" }}>
         {Array.from({ length: 3 }, (_, index) => (
           <Frame key={index}>
-            <Header>Lorem {index}</Header>
+            <Header>Lorem</Header>
 
             {Array.from({ length: 5 }, (_, index) => (
               <p key={index}>
