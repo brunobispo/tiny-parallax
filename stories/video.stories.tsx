@@ -4,10 +4,10 @@ import { Frame, useParallax } from "src";
 import videoSrc from "./video.mp4";
 
 function Player() {
-  const video = useRef<HTMLVideoElement>(null!);
+  const video = useRef<HTMLVideoElement>(null);
 
   useParallax((rate) => {
-    if (video.current.duration)
+    if (video.current?.duration)
       video.current.currentTime = rate * video.current.duration;
   });
 
@@ -18,6 +18,7 @@ function Player() {
       src={videoSrc}
       autoPlay
       playsInline
+      onCanPlay={() => video.current?.pause()}
     />
   );
 }
