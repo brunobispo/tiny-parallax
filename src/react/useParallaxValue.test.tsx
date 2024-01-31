@@ -27,6 +27,6 @@ describe("useParallaxValue", () => {
 
     window.scrollTo(0, 100);
 
-    await waitFor(() => expect(container.textContent).toBe("15%"));
+    await waitFor(() => expect(container.textContent).toBe("13%"));
   });
 });

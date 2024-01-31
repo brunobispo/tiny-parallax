@@ -27,8 +27,9 @@ export default defineConfig({
     setupFiles: ["./src/tests.ts"],
     browser: {
       enabled: true,
-      name: "chrome",
+      name: "chromium",
       headless: true,
+      provider: "playwright",
     },
   },
 });

@@ -11,6 +11,7 @@ jobs:
         with:
           node-version: "18.19.0"
       - run: npm ci
+      - run: npx playwright install --with-deps
       - run: npm test
       - uses: JS-DevTools/npm-publish@v3
         with:
