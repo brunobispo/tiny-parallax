@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps } from "react";
 import { Layer, Frame, ranges, Viewport } from "src";
 import { Example } from "stories/Example";
+import Ruler from "stories/Ruler";
 
 export default {
   title: "Docs / Ranges",
@@ -9,6 +10,7 @@ export default {
     return (
       <Viewport className="viewport">
         <Frame className="frame">
+          <Ruler {...args} />
           <Layer {...args}>
             <Example />
           </Layer>
@@ -70,6 +72,7 @@ export const FrameRef: StoryObj<{ enter: number; exit: number }> = {
     return (
       <Viewport className="viewport">
         <Frame className="frame">
+          <Ruler range={ranges.frameRef(args.enter, args.exit)} />
           <Layer range={ranges.frameRef(args.enter, args.exit)}>
             <Example />
           </Layer>
@@ -109,6 +112,7 @@ export const ViewportRef: StoryObj<{ threshold: number; pivot: number }> = {
       <Viewport className="viewport">
         <Frame className="frame">
           <Layer range={ranges.viewportRef(args.threshold, args.pivot)}>
+            <Ruler range={ranges.viewportRef(args.threshold, args.pivot)} />
             <Example />
           </Layer>
         </Frame>

@@ -97,3 +97,30 @@ body {
   color: #569aff;
   padding: 0.2rem 0.3rem;
 }
+
+.ruler {
+  position: fixed;
+  opacity: 0.5;
+  left: 50%;
+  width: 0;
+  border: 1px solid #000;
+}
+
+.ruler:before,
+.ruler:after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 8px;
+  height: 8px;
+  left: -4px;
+  background: #000;
+}
+
+.ruler:before {
+  top: -1px;
+}
+
+.ruler:after {
+  bottom: -1px;
+}
