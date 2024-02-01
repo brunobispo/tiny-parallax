@@ -6,10 +6,7 @@ import { RangeFunction } from "src/types";
  * @param exit The percentage of the element that must leave the viewport for the animation to end.
  */
 export function frameRef(enter: number, exit = enter): RangeFunction {
-  return (viewport, element) => [
-    element * enter,
-    viewport + element * (1 - exit),
-  ];
+  return (viewport, element) => [element * enter, viewport + element * exit];
 }
 
 /**
@@ -31,7 +28,7 @@ export const inView = viewportRef(1, 1);
  * Starts the animation when the frame enters the viewport and is fully visible,
  * and completes when the frame begins to leave the viewport.
  */
-export const entireInView = frameRef(1);
+export const entireInView = frameRef(1, 0);
 
 /*
  * Starts the animation once the frame starts to enter the viewport,
