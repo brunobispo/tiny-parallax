@@ -83,4 +83,5 @@ const App = () => (
 );
 ```
 
-For convenience, the library includes predefined range functions to easily set up animation thresholds. For in-depth information, consult the source code at [src/core/ranges.ts](src/core/ranges.ts).
+For added convenience, the library offers a selection of predefined range functions that simplify the process of establishing animation boundaries. To delve deeper into these functions, examine the source code found at [src/core/ranges.ts](src/core/ranges.ts).
+Explore the [Ranges storybook](https://brunobispo.github.io/tiny-parallax?path=/story/docs-ranges--predefined-ranges&args=range:inView) for a visual guide and a better grasp of the predefined ranges.
