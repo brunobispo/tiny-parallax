@@ -21,6 +21,7 @@ const config: StorybookConfig = {
       ...config,
       plugins: await withoutVitePlugins(config.plugins, [
         "vite:lib-inject-css",
+        "vite:dts",
       ]),
     };
   },
