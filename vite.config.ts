@@ -19,10 +19,14 @@ export default defineConfig({
     },
   ],
   build: {
+    target: "es2015",
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       fileName: "index",
       formats: ["es", "cjs"],
+    },
+    rollupOptions: {
+      external: ["react", "react/jsx-runtime"],
     },
   },
   test: {
