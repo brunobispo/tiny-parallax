@@ -1,11 +1,11 @@
-import {
+import type {
   FrameElement,
   ParallaxOptions,
   RateHandler,
   Rect,
   ViewportElement,
-  ranges,
-} from "src";
+} from "src/types";
+import * as ranges from "src/core/ranges";
 import * as utils from "src/utils";
 
 const elementParallax = new WeakMap<FrameElement, Set<Parallax>>();

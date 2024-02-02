@@ -21,6 +21,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    "paths": {
+      "src": ["./src"],
+      "src/*": ["./src/*"]
+    },
+
     "types": ["vitest", "vitest/globals"]
   },
   "include": ["src/**/*", "stories/**/*"],

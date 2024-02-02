@@ -1,6 +1,6 @@
 import { HTMLAttributes, useContext, useState } from "react";
-import { ParallaxOptions } from "src";
 import { FrameContext, OptionsContext } from "src/react/context";
+import { ParallaxOptions } from "src/types";
 import * as utils from "src/utils";
 
 interface FrameProps extends HTMLAttributes<HTMLDivElement>, ParallaxOptions {}

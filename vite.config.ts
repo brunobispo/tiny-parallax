@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
-    dts({ include: ["src"] }),
+    dts({ rollupTypes: true, exclude: ["stories"] }),
     {
       // see: https://github.com/vitest-dev/vitest/issues/5046
       name: "exclude-util-package",
@@ -17,12 +17,12 @@ export default defineConfig({
         if (/node_modules\/util/.test(id)) return { code: "", map: null };
       },
     },
-  ] as never,
+  ],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       fileName: "index",
-      formats: ["es"],
+      formats: ["es", "cjs"],
     },
   },
   test: {
