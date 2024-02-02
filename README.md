@@ -84,4 +84,15 @@ const App = () => (
 ```
 
 For added convenience, the library offers a selection of predefined range functions that simplify the process of establishing animation boundaries. To delve deeper into these functions, examine the source code found at [src/core/ranges.ts](src/core/ranges.ts).
+
 Explore the [Ranges storybook](https://brunobispo.github.io/tiny-parallax?path=/story/docs-ranges--predefined-ranges&args=range:inView) for a visual guide and a better grasp of the predefined ranges.
+
+## Caveats
+
+### 1. Why is my animation flickering?
+
+This issue may be caused by the animation causing changes in the size of the element, which can affect the rate calculation. To prevent this, it is recommended to use the CSS property `transform` for animations. If it is necessary to change other properties, make sure they do not affect the element size during the animation.
+
+### 2. Why is my animation not running smoothly?
+
+This issue may be caused by a large number of elements or complex animations. To improve performance, it is recommended to optimize your animation by reducing the number of elements or simplifying the animation. Keep in mind that adding `Frame`s can be costly as their dimensions need to be continuously calculated. On the other hand, using `Layer`s or `useParallax` with a parent `Frame` is more efficient.
