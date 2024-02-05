@@ -38,5 +38,14 @@ export default defineConfig({
       headless: true,
       provider: "playwright",
     },
+    coverage: {
+      provider: "istanbul",
+      exclude: [
+        "storybook-static/**",
+        "stories/**",
+        ".storybook",
+        ".eslintrc.cjs",
+      ],
+    },
   },
 });
