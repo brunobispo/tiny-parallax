@@ -15,7 +15,7 @@ describe("Parallax", () => {
   });
 
   afterEach(() => {
-    parallax.remove();
+    parallax?.remove();
     element.remove();
     viewport?.remove();
   });
@@ -24,6 +24,40 @@ describe("Parallax", () => {
     const fn = vi.fn();
     parallax = new Parallax(fn, undefined, element);
     expect(fn).toHaveBeenCalledWith(0);
+  });
+
+  it("dedups event listeners", () => {
+    const viewport = document.createElement("div");
+    const addEventListener = vi.spyOn(viewport, "addEventListener");
+
+    const parallax1 = new Parallax(() => {}, viewport, element);
+    const parallax2 = new Parallax(() => {}, viewport, element);
+    parallax1.remove();
+    parallax2.remove();
+
+    expect(addEventListener).toHaveBeenCalledTimes(1);
+  });
+
+  it("cleans up event listeners", () => {
+    const viewport = document.createElement("div");
+    const removeEventListener = vi.spyOn(viewport, "removeEventListener");
+
+    const parallax1 = new Parallax(
+      () => {},
+      viewport,
+      document.createElement("div")
+    );
+    const parallax2 = new Parallax(
+      () => {},
+      viewport,
+      document.createElement("div")
+    );
+
+    parallax1.remove();
+    expect(removeEventListener).not.toHaveBeenCalled();
+
+    parallax2.remove();
+    expect(removeEventListener).toHaveBeenCalledTimes(1);
   });
 
   it("calculates the rate based on the range", async () => {
@@ -130,7 +164,7 @@ describe("Parallax", () => {
     async ({ scrollPosition, expected }) => {
       let rate: number;
 
-      new Parallax((r) => (rate = r), undefined, element, {
+      parallax = new Parallax((r) => (rate = r), undefined, element, {
         range: ranges.entireInView,
       });
       element.scrollIntoView({ block: scrollPosition });
@@ -149,7 +183,7 @@ describe("Parallax", () => {
     async ({ scrollPosition, expected }) => {
       let rate: number;
 
-      new Parallax((r) => (rate = r), undefined, element, {
+      parallax = new Parallax((r) => (rate = r), undefined, element, {
         direction: "horizontal",
         range: ranges.entireInView,
       });

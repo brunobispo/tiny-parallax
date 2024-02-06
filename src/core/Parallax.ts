@@ -62,16 +62,17 @@ export class Parallax {
    */
   remove() {
     const elements = viewportElement.get(this.viewport);
+    const parallaxes = elementParallax.get(this.element);
 
-    if (elements) {
+    parallaxes?.delete(this);
+
+    if (parallaxes?.size === 0 && elements) {
       elements.delete(this.element);
       if (elements.size === 0) {
         viewportElement.delete(this.viewport);
         this.viewport.removeEventListener("scroll", handleScroll);
       }
     }
-
-    elementParallax.get(this.element)?.delete(this);
   }
 
   /**
