@@ -31,6 +31,7 @@ export function Layer({
 
   useParallax(
     (rate) => {
+      /* istanbul ignore else -- @preserve */
       if (ref) ref.style.setProperty(cssVariable, rate.toString());
     },
     {

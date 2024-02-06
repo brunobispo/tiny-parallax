@@ -82,6 +82,7 @@ export class Parallax {
     const viewportRect = rects.get(this.viewport);
     const frameRect = rects.get(this.element);
 
+    /* istanbul ignore if -- @preserve */
     if (!viewportRect || !frameRect) return;
 
     const { range, offset, speed, clamp, direction } = this.config;
@@ -113,7 +114,9 @@ function handleScroll(event: Event) {
   const viewport = event.currentTarget as ViewportElement;
   const elements = viewportElement.get(viewport);
 
-  for (const element of elements ?? []) calculateElement(element);
+  /* istanbul ignore else -- @preserve */
+  if (elements) for (const element of elements) calculateElement(element);
+
   calculateViewport(viewport);
   animate(viewport);
 }
@@ -147,21 +150,22 @@ function calculateViewport(viewport: ViewportElement) {
  * Animates all parallax elements in the viewport.
  */
 function animate(viewport: ViewportElement) {
-  const viewportRect = rects.get(viewport);
   const elements = viewportElement.get(viewport);
 
-  if (!viewportRect) return;
+  /* istanbul ignore else -- @preserve */
+  if (elements)
+    for (const element of elements) {
+      const animation = animationFrames.get(element);
+      if (animation) cancelAnimationFrame(animation);
 
-  for (const element of elements ?? []) {
-    const animation = animationFrames.get(element);
-    if (animation) cancelAnimationFrame(animation);
+      animationFrames.set(
+        element,
+        requestAnimationFrame(() => {
+          const parallaxes = elementParallax.get(element);
 
-    animationFrames.set(
-      element,
-      requestAnimationFrame(() => {
-        const parallaxes = elementParallax.get(element);
-        for (const parallax of parallaxes ?? []) parallax.update();
-      })
-    );
-  }
+          /* istanbul ignore else -- @preserve */
+          if (parallaxes) for (const parallax of parallaxes) parallax.update();
+        })
+      );
+    }
 }
