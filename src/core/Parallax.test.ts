@@ -4,6 +4,7 @@ import { waitFor } from "@testing-library/dom";
 describe("Parallax", () => {
   let element: HTMLElement;
   let parallax: Parallax;
+  let viewport: HTMLElement;
 
   beforeEach(() => {
     element = document.createElement("div");
@@ -16,6 +17,7 @@ describe("Parallax", () => {
   afterEach(() => {
     parallax.remove();
     element.remove();
+    viewport?.remove();
   });
 
   it("triggers the callback when is initialized", () => {
@@ -73,6 +75,37 @@ describe("Parallax", () => {
     element.scrollIntoView({ block: "start" });
 
     await waitFor(() => expect(rate).toBe(0.9));
+  });
+
+  it("accepts a custom viewport", async () => {
+    let rate: number;
+
+    document.body.style.paddingBlock = "none";
+    document.body.style.paddingInline = "none";
+    document.body.style.overflow = "hidden";
+
+    viewport = document.createElement("div");
+    viewport.style.position = "absolute";
+    viewport.style.height = "50vh";
+    viewport.style.width = "100vw";
+    viewport.style.top = "50vh";
+    viewport.style.left = "0";
+    viewport.style.overflow = "auto";
+
+    const buffer = document.createElement("div");
+    buffer.style.paddingBlock = "100vh";
+
+    buffer.append(element);
+    viewport.append(buffer);
+    document.body.append(viewport);
+
+    parallax = new Parallax((r) => (rate = r), viewport, element, {
+      range: ranges.entireInView,
+    });
+
+    viewport.scrollTop = (viewport.scrollHeight - viewport.clientHeight) / 2;
+
+    await waitFor(() => expect(rate).toBe(0.5));
   });
 
   it("applies the speed", async () => {
