@@ -11,7 +11,7 @@ import * as utils from "src/utils";
 const elementParallax = new WeakMap<FrameElement, Set<Parallax>>();
 const viewportElement = new WeakMap<ViewportElement, Set<FrameElement>>();
 const rects = new WeakMap<ViewportElement, Rect>();
-const animationFrames = new WeakMap<FrameElement, number>();
+const scheduled = new Set<ViewportElement>();
 
 export class Parallax {
   public config: Required<ParallaxOptions>;
@@ -112,13 +112,38 @@ export class Parallax {
  */
 function handleScroll(event: Event) {
   const viewport = event.currentTarget as ViewportElement;
-  const elements = viewportElement.get(viewport);
 
-  /* istanbul ignore else -- @preserve */
-  if (elements) for (const element of elements) calculateElement(element);
+  if (scheduled.size === 0) requestAnimationFrame(flush);
+  scheduled.add(viewport);
+}
 
-  calculateViewport(viewport);
-  animate(viewport);
+/**
+ * Flushes the scheduled scroll events.
+ */
+function flush() {
+  for (const viewport of scheduled) {
+    const elements = viewportElement.get(viewport);
+
+    /* istanbul ignore else -- @preserve */
+    if (elements) for (const element of elements) calculateElement(element);
+
+    calculateViewport(viewport);
+  }
+
+  for (const viewport of scheduled) {
+    const elements = viewportElement.get(viewport);
+
+    /* istanbul ignore else -- @preserve */
+    if (elements)
+      for (const element of elements) {
+        const parallaxes = elementParallax.get(element);
+
+        /* istanbul ignore else -- @preserve */
+        if (parallaxes) for (const parallax of parallaxes) parallax.update();
+      }
+  }
+
+  scheduled.clear();
 }
 
 /**
@@ -144,28 +169,4 @@ function calculateViewport(viewport: ViewportElement) {
       height: document.documentElement.clientHeight,
     });
   }
-}
-
-/**
- * Animates all parallax elements in the viewport.
- */
-function animate(viewport: ViewportElement) {
-  const elements = viewportElement.get(viewport);
-
-  /* istanbul ignore else -- @preserve */
-  if (elements)
-    for (const element of elements) {
-      const animation = animationFrames.get(element);
-      if (animation) cancelAnimationFrame(animation);
-
-      animationFrames.set(
-        element,
-        requestAnimationFrame(() => {
-          const parallaxes = elementParallax.get(element);
-
-          /* istanbul ignore else -- @preserve */
-          if (parallaxes) for (const parallax of parallaxes) parallax.update();
-        })
-      );
-    }
 }
