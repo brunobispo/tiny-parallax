@@ -1,4 +1,4 @@
-# tiny-parallax ![cov](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/brunobispo/64f2e5c0e1543a5949f6d7053df7f400/raw/coverage_main.json)
+# tiny-parallax [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/brunobispo/tiny-parallax/blob/main/LICENSE) ![cov](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/brunobispo/64f2e5c0e1543a5949f6d7053df7f400/raw/coverage_main.json) [![storybook](https://github.com/brunobispo/tiny-parallax/actions/workflows/deploy-github-pages.yaml/badge.svg)](https://brunobispo.github.io/tiny-parallax) [![npm](https://img.shields.io/npm/v/tiny-parallax.svg)](https://www.npmjs.com/package/tiny-parallax) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 Creating scroll-based animations often involves complex calculations and event handling. The `tiny-parallax` library simplifies this process by computing a parallax rate as elements move within the viewport. This rate can be utilized to dynamically adjust styles, enabling fluid and responsive transitions that are easily managed through CSS.
 
