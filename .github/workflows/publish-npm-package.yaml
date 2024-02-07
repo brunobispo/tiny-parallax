@@ -1,3 +1,5 @@
+name: NPM Package
+
 on:
   push:
     branches: main
@@ -12,7 +14,29 @@ jobs:
           node-version: "18.19.0"
       - run: npm ci
       - run: npx playwright install --with-deps
-      - run: npm test
+      - run: npm run coverage
+      - uses: satackey/action-js-inline@v0.0.2
+        id: coverage
+        with:
+          script: |
+            const core = require('@actions/core')
+            const fs = require('fs')
+
+            const file = fs.readFileSync('coverage/coverage-summary.json', 'utf-8')
+            const json = JSON.parse(file);
+            const stats = Object.values(json.total)
+            const pct = stats.reduce((total, stat) => total + stat.pct, 0) / stats.length;
+
+            core.exportVariable('COVERAGE_PCT', pct);
+      - uses: schneegans/dynamic-badges-action@v1.0.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 64f2e5c0e1543a5949f6d7053df7f400
+          filename: coverage_${{ github.ref_name }}.json
+          label: Coverage
+          message: ${{ env.COVERAGE_PCT }}%
+          namedLogo: vitest
+          color: green
       - run: npm run build
       - uses: JS-DevTools/npm-publish@v3
         with:

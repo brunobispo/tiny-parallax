@@ -40,6 +40,7 @@ export default defineConfig({
     },
     coverage: {
       provider: "istanbul",
+      reporter: ["json-summary", "html"],
       exclude: [
         "storybook-static/**",
         "stories/**",
