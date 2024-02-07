@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { useRef } from "react";
-import { Frame, RateHandler, useParallax } from "src";
+import { Frame, RateHandler, Viewport, ranges, useParallax } from "src";
 
 const Component = (props: { fn: RateHandler }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,6 +31,23 @@ describe("useParallax", () => {
 
       await waitFor(() => expect(fn).toHaveBeenCalled());
     });
+  });
+
+  it("uses a custom viewport as reference", async () => {
+    const fn = vi.fn();
+
+    render(
+      <Viewport
+        style={{ height: "50vh", top: "50vh" }}
+        range={ranges.entireInView}
+      >
+        <Frame>
+          <Component fn={fn} />
+        </Frame>
+      </Viewport>
+    );
+
+    await waitFor(() => expect(fn).toHaveBeenCalledWith(1));
   });
 
   it("triggers the callback", async () => {
